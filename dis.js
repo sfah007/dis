@@ -6,9 +6,21 @@ const StealthPlugin = require('puppeteer-extra-plugin-stealth')
 
 const client = new Discord.Client();
 
+client.on('ready', () => {
+    console.log('I am ready!');
+});
+
+client.on('message', message => {
+    if (message.content === 'ping') {
+    	message.reply('pong');
+  	}
+});
+
+// THIS  MUST  BE  THIS  WAY
+client.login(process.env.BOT_TOKEN);
+
 global.username = 'hamzawiali54@gmail.com'
 global.password = 'aliALI0'
-client.login(process.env.BOT_TOKEN);
 
 var queue = false;
 
