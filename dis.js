@@ -2,49 +2,6 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 
 client.on('ready', () => {
-    console.log('I am ready!');
-});
-
-client.on('message', message => {
-    if (message.content === 'ping') {
-    	message.reply('pong');
-  	}
-});
-
-// THIS  MUST  BE  THIS  WAY
-client.login(process.env.BOT_TOKEN);
-
-global.username = 'example@gmail.com'
-global.password = 'examplepassword'
-
-const puppeteer = require('puppeteer-extra');
-const fs = require('fs');
-const https = require('https');
-const StealthPlugin = require('puppeteer-extra-plugin-stealth')
-
-
-
-var queue = false;
-
-puppeteer.use(StealthPlugin())
-
-const download = (url, destination) => new Promise((resolve, reject) => {
-    const file = fs.createWriteStream(destination);
-
-    https.get(url, response => {
-        response.pipe(file);
-
-        file.on('finish', () => {
-            file.close(resolve(true));
-        });
-    }).on('error', error => {
-        fs.unlink(destination);
-
-        reject(error.message);
-    });
-});
-
-client.on('ready', () => {
     login_chegg()
     console.log(`Logged in as ${client.user.tag}!`);
 });
@@ -193,5 +150,47 @@ async function login_chegg() {
         delay: 100
     });
     await page[0].click('#eggshell-8 > form > div > div > div > footer > button'); // Types slower, like a user
-    console.log("Ready!");
+    console.log('I am ready!');
+});
+
+client.on('message', message => {
+    if (message.content === 'ping') {
+    	message.reply('pong');
+  	}
+});
+
+// THIS  MUST  BE  THIS  WAY
+client.login(process.env.BOT_TOKEN);
+
+global.username = 'example@gmail.com'
+global.password = 'examplepassword'
+
+const puppeteer = require('puppeteer-extra');
+const fs = require('fs');
+const https = require('https');
+const StealthPlugin = require('puppeteer-extra-plugin-stealth')
+
+
+
+var queue = false;
+
+puppeteer.use(StealthPlugin())
+
+const download = (url, destination) => new Promise((resolve, reject) => {
+    const file = fs.createWriteStream(destination);
+
+    https.get(url, response => {
+        response.pipe(file);
+
+        file.on('finish', () => {
+            file.close(resolve(true));
+        });
+    }).on('error', error => {
+        fs.unlink(destination);
+
+        reject(error.message);
+    });
+});
+
+
 }
